@@ -1,6 +1,5 @@
-import * as fromToppings from "../actions/toppings.action";
-
-import { Topping } from "../../models/topping.model";
+import * as fromToppings from '../actions/toppings.action';
+import { Topping } from '../../models/topping.model';
 
 export interface ToppingsState {
   entities: { [id: number]: Topping };
@@ -13,7 +12,7 @@ export const initialState: ToppingsState = {
   entities: {},
   loaded: false,
   loading: false,
-  selectedToppings: []
+  selectedToppings: [],
 };
 
 export function reducer(
@@ -26,14 +25,14 @@ export function reducer(
 
       return {
         ...state,
-        selectedToppings
+        selectedToppings,
       };
     }
 
     case fromToppings.LOAD_TOPPINGS: {
       return {
         ...state,
-        loading: true
+        loading: true,
       };
     }
 
@@ -44,19 +43,19 @@ export function reducer(
         (entities: { [id: number]: Topping }, topping: Topping) => {
           return {
             ...entities,
-            [topping.id]: topping
+            [topping.id]: topping,
           };
         },
         {
-          ...state.entities
+          ...state.entities,
         }
       );
 
       return {
         ...state,
-        loading: false,
         loaded: true,
-        entities
+        loading: false,
+        entities,
       };
     }
 
@@ -64,7 +63,7 @@ export function reducer(
       return {
         ...state,
         loaded: false,
-        loading: false
+        loading: false,
       };
     }
   }
@@ -72,7 +71,7 @@ export function reducer(
   return state;
 }
 
-export const getToppingsEntities = (state: ToppingsState) => state.entities;
+export const getToppingEntities = (state: ToppingsState) => state.entities;
 export const getToppingsLoaded = (state: ToppingsState) => state.loaded;
 export const getToppingsLoading = (state: ToppingsState) => state.loading;
 export const getSelectedToppings = (state: ToppingsState) =>

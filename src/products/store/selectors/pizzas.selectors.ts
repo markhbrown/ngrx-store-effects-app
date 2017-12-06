@@ -3,7 +3,8 @@ import { createSelector } from "@ngrx/store";
 import * as fromRoot from "../../../app/store";
 import * as fromFeature from "../reducers";
 import * as fromPizzas from "../reducers/pizzas.reducer";
-import * as fromToppings from "../reducers/toppings.reducer";
+import * as fromToppings from "./toppings.selectors";
+
 import { Pizza } from "../../models/pizza.model";
 
 export const getPizzaState = createSelector(
@@ -26,7 +27,7 @@ export const getSelectedPizza = createSelector(
 
 export const getPizzaVisualised = createSelector(
   getSelectedPizza,
-  fromToppings.getToppingsEntities,
+  fromToppings.getToppingEntities,
   fromToppings.getSelectedToppings,
   (pizza, toppingEntities, selectedToppings) => {
     const toppings = selectedToppings.map(id => toppingEntities[id]);
